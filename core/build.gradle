@@ -1,0 +1,60 @@
+apply plugin: 'com.android.library'
+
+android {
+  compileSdkVersion 20
+  buildToolsVersion "20.0.0"
+
+  defaultConfig {
+    applicationId 'com.thuytrinh.android.multiphotochooser'
+    minSdkVersion 15
+    targetSdkVersion 20
+    versionCode 1
+    versionName "1.0"
+
+    testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_7
+    targetCompatibility JavaVersion.VERSION_1_7
+  }
+
+  buildTypes {
+    release {
+      runProguard false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+
+  // Exclude following files to avoid
+  // the conflicts between Mockito and AssertJ.
+  packagingOptions {
+    exclude 'LICENSE.txt'
+    exclude 'LICENSE'
+    exclude 'NOTICE'
+    exclude 'asm-license.txt'
+  }
+
+  productFlavors {
+  }
+}
+
+dependencies {
+  androidTestCompile 'com.google.guava:guava:14.0.1',
+      'com.squareup.dagger:dagger:1.1.0',
+      'org.hamcrest:hamcrest-core:1.1',
+      'org.hamcrest:hamcrest-integration:1.1',
+      'org.hamcrest:hamcrest-library:1.1'
+  androidTestCompile 'org.assertj:assertj-core:1.6.1'
+  androidTestCompile 'com.squareup.assertj:assertj-android:1.0.0'
+  androidTestCompile 'org.mockito:mockito-core:1.9.5'
+  androidTestCompile 'com.google.dexmaker:dexmaker:1.1'
+  androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.1'
+
+  compile 'com.squareup.dagger:dagger:1.2.2'
+  provided 'com.squareup.dagger:dagger-compiler:1.2.2'
+  compile 'com.netflix.rxjava:rxjava-android:0.10.1'
+  compile 'com.squareup.picasso:picasso:2.3.4'
+
+  compile fileTree(dir: 'libs', include: ['*.jar'])
+}
