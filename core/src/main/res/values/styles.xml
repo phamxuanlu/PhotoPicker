@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <style name="GalleryGridViewStyle">
+    <item name="android:paddingLeft">@dimen/content_padding_horizontal_micro</item>
+    <item name="android:paddingRight">@dimen/content_padding_horizontal_micro</item>
+    <item name="android:paddingTop">@dimen/content_padding_vertical_micro</item>
+    <item name="android:paddingBottom">@dimen/content_padding_vertical_micro</item>
+    <item name="android:verticalSpacing">@dimen/content_padding_vertical_micro</item>
+    <item name="android:horizontalSpacing">@dimen/content_padding_horizontal_micro</item>
+    <item name="android:scrollbarStyle">outsideOverlay</item>
+    <item name="android:clipToPadding">false</item>
+  </style>
+
+</resources>
