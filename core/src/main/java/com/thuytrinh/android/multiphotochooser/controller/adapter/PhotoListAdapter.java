@@ -2,6 +2,7 @@ package com.thuytrinh.android.multiphotochooser.controller.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
@@ -19,6 +20,7 @@ public class PhotoListAdapter extends CursorAdapter {
 
   private ImageCursorMapper mImageCursorMapper;
   private Picasso mPicasso;
+  private SparseArray<Long> mCheckedItemMap;
 
   @Inject
   public PhotoListAdapter(Context context,
@@ -45,6 +47,9 @@ public class PhotoListAdapter extends CursorAdapter {
   public void bindView(View view, Context context, Cursor cursor) {
     PhotoItemLayout itemView = (PhotoItemLayout) view;
 
+    int position = cursor.getPosition();
+    itemView.setChecked(mCheckedItemMap.get(position) != null);
+
     File photoFile = mImageCursorMapper.getDataFile();
     mPicasso.load(photoFile)
         .resize(200, 200)
@@ -57,5 +62,9 @@ public class PhotoListAdapter extends CursorAdapter {
   public Cursor swapCursor(Cursor newCursor) {
     mImageCursorMapper.setCursor(newCursor);
     return super.swapCursor(newCursor);
+  }
+
+  public void setCheckedItemMap(SparseArray<Long> checkedItemMap) {
+    mCheckedItemMap = checkedItemMap;
   }
 }

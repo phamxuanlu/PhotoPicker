@@ -82,6 +82,7 @@ public class PhotoListFragment extends BaseFragment {
         .inject(this);
 
     mAlbumId = getArguments().getLong(EXTRA_ALBUM_ID);
+    mPhotoListAdapter.setCheckedItemMap(mCheckedItemMap);
   }
 
   @Override
