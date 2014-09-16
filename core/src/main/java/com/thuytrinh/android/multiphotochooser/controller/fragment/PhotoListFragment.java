@@ -135,18 +135,25 @@ public class PhotoListFragment extends BaseFragment {
 
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        boolean isChecked = toggleChoice(position, id);
         Checkable itemView = (Checkable) view;
-        itemView.toggle();
-
-        if (itemView.isChecked()) {
-          mCheckedItemMap.put(position, id);
-        } else {
-          mCheckedItemMap.remove(position);
-        }
-
-        mWhenChoicesChanged.onNext(mCheckedItemMap.size());
+        itemView.setChecked(isChecked);
       }
     });
+  }
+
+  private boolean toggleChoice(int position, long id) {
+    boolean isChecked = false;
+    if (mCheckedItemMap.get(position) == null) {
+      mCheckedItemMap.put(position, id);
+      isChecked = true;
+    } else {
+      mCheckedItemMap.remove(position);
+    }
+
+    // Emit the change to subscribers.
+    mWhenChoicesChanged.onNext(mCheckedItemMap.size());
+    return isChecked;
   }
 
   private void emitChoices() {
