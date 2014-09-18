@@ -12,8 +12,7 @@ import com.thuytrinh.android.multiphotochooser.R;
 import com.thuytrinh.android.multiphotochooser.controller.SimpleLoaderListener;
 import com.thuytrinh.android.multiphotochooser.controller.adapter.AlbumListAdapter;
 import com.thuytrinh.android.multiphotochooser.controller.loader.AlbumListLoader;
-import com.thuytrinh.android.multiphotochooser.module.AppModule;
-import com.thuytrinh.android.multiphotochooser.module.AppObjectGraph;
+import com.thuytrinh.android.multiphotochooser.module.ObjectGraphContainer;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -36,8 +35,7 @@ public class AlbumListFragment extends BaseFragment {
     super.onCreate(savedInstanceState);
     setLayoutId(R.layout.fragment_album_list);
 
-    AppObjectGraph.get()
-        .plus(new AppModule(getActivity()))
+    ObjectGraphContainer.getObjectGraph(getActivity().getApplicationContext())
         .inject(this);
   }
 

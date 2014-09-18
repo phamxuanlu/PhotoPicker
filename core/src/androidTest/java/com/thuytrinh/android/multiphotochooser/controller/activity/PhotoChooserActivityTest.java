@@ -3,9 +3,20 @@ package com.thuytrinh.android.multiphotochooser.controller.activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
+
+import com.thuytrinh.android.multiphotochooser.controller.fragment.AlbumListFragment;
+import com.thuytrinh.android.multiphotochooser.controller.loader.AlbumListLoader;
+import com.thuytrinh.android.multiphotochooser.module.AppModule;
+import com.thuytrinh.android.multiphotochooser.module.ObjectGraphContainer;
 
 import java.util.concurrent.CountDownLatch;
+
+import dagger.Module;
+import dagger.ObjectGraph;
+import dagger.Provides;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,7 +30,7 @@ public class PhotoChooserActivityTest extends ActivityInstrumentationTestCase2<P
   }
 
   public void testActivity() throws InterruptedException {
-    new CountDownLatch(0).await();
+    new CountDownLatch(1).await();
   }
 
   public void testShouldCreateIntentProperly() {
@@ -38,9 +49,37 @@ public class PhotoChooserActivityTest extends ActivityInstrumentationTestCase2<P
     super.setUp();
 
     mTargetContext = getInstrumentation().getTargetContext();
+    Context appContext = mTargetContext.getApplicationContext();
+    assertNotNull(appContext);
+
+    ObjectGraphContainer.setMockObjectGraph(ObjectGraph.create(
+        new AppModule(appContext),
+        new MockAppModule()
+    ));
+
+    // Launch the Activity.
     Intent mockIntent = PhotoChooserActivity.newIntent(mTargetContext);
     setActivityIntent(mockIntent);
-
     mActivity = getActivity();
+  }
+
+  @Module(
+      injects = {AlbumListFragment.class},
+      overrides = true,
+      complete = false
+  )
+  public class MockAppModule {
+
+    @Provides
+    AlbumListLoader provideMockAlbumListLoader(Context context) {
+      return new AlbumListLoader(context) {
+
+        @Override
+        protected Cursor onLoadInBackground() {
+          Log.w("AwesomePicker", "Yes, I did it!");
+          return super.onLoadInBackground();
+        }
+      };
+    }
   }
 }
