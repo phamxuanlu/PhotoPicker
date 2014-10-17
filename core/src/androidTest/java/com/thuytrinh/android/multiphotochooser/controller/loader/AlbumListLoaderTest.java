@@ -4,7 +4,7 @@ import android.database.Cursor;
 import android.provider.MediaStore;
 import android.test.AndroidTestCase;
 
-import com.thuytrinh.android.multiphotochooser.module.ObjectGraphContainer;
+import com.thuytrinh.android.multiphotochooser.module.ObjectLocator;
 
 import org.assertj.android.api.Assertions;
 
@@ -44,7 +44,7 @@ public class AlbumListLoaderTest extends AndroidTestCase {
   protected void setUp() throws Exception {
     super.setUp();
 
-    ObjectGraph objectGraph = ObjectGraphContainer.getObjectGraph(getContext());
+    ObjectGraph objectGraph = ObjectLocator.getGraph(getContext());
     mAlbumListLoader = objectGraph.get(AlbumListLoader.class);
   }
 }

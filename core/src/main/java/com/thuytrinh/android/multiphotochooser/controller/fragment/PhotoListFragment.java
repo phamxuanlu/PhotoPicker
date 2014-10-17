@@ -17,7 +17,7 @@ import com.thuytrinh.android.multiphotochooser.controller.SimpleLoaderListener;
 import com.thuytrinh.android.multiphotochooser.controller.adapter.PhotoListAdapter;
 import com.thuytrinh.android.multiphotochooser.controller.loader.PhotoListLoader;
 import com.thuytrinh.android.multiphotochooser.model.Photo;
-import com.thuytrinh.android.multiphotochooser.module.ObjectGraphContainer;
+import com.thuytrinh.android.multiphotochooser.module.ObjectLocator;
 
 import java.util.ArrayList;
 
@@ -76,7 +76,7 @@ public class PhotoListFragment extends BaseFragment {
     setHasOptionsMenu(true);
     setLayoutId(R.layout.fragment_photo_list);
 
-    ObjectGraphContainer.getObjectGraph(getActivity().getApplicationContext())
+    ObjectLocator.getGraph(getActivity().getApplicationContext())
         .inject(this);
 
     mAlbumId = getArguments().getLong(EXTRA_ALBUM_ID);

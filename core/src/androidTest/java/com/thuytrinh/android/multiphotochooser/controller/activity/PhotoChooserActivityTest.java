@@ -10,7 +10,7 @@ import android.util.Log;
 import com.thuytrinh.android.multiphotochooser.controller.fragment.AlbumListFragment;
 import com.thuytrinh.android.multiphotochooser.controller.loader.AlbumListLoader;
 import com.thuytrinh.android.multiphotochooser.module.AppModule;
-import com.thuytrinh.android.multiphotochooser.module.ObjectGraphContainer;
+import com.thuytrinh.android.multiphotochooser.module.ObjectLocator;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -52,7 +52,7 @@ public class PhotoChooserActivityTest extends ActivityInstrumentationTestCase2<P
     Context appContext = mTargetContext.getApplicationContext();
     assertNotNull(appContext);
 
-    ObjectGraphContainer.setMockObjectGraph(ObjectGraph.create(
+    ObjectLocator.setMockGraph(ObjectGraph.create(
         new AppModule(appContext),
         new MockAppModule()
     ));
