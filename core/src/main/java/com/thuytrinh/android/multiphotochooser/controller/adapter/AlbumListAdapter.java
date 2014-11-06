@@ -22,8 +22,8 @@ public class AlbumListAdapter extends CursorAdapter {
 
   @Inject
   public AlbumListAdapter(Context context,
-      ImageCursorMapper imageCursorMapper,
-      Picasso picasso) {
+                          ImageCursorMapper imageCursorMapper,
+                          Picasso picasso) {
     super(context, null, 0);
 
     mImageCursorMapper = imageCursorMapper;

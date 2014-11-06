@@ -49,8 +49,8 @@ public class AppModule {
 
   @Provides
   AlbumListAdapter provideAlbumListAdapter(Context context,
-      ImageCursorMapper imageCursorMapper,
-      Picasso picasso) {
+                                           ImageCursorMapper imageCursorMapper,
+                                           Picasso picasso) {
     return new AlbumListAdapter(context, imageCursorMapper, picasso);
   }
 
@@ -66,8 +66,8 @@ public class AppModule {
 
   @Provides
   PhotoListAdapter providePhotoListAdapter(Context context,
-      ImageCursorMapper imageCursorMapper,
-      Picasso picasso) {
+                                           ImageCursorMapper imageCursorMapper,
+                                           Picasso picasso) {
     return new PhotoListAdapter(context, imageCursorMapper, picasso);
   }
 }

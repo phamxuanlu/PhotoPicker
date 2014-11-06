@@ -24,8 +24,8 @@ public class PhotoListAdapter extends CursorAdapter {
 
   @Inject
   public PhotoListAdapter(Context context,
-      ImageCursorMapper imageCursorMapper,
-      Picasso picasso) {
+                          ImageCursorMapper imageCursorMapper,
+                          Picasso picasso) {
     super(context, null, 0);
 
     mImageCursorMapper = imageCursorMapper;
