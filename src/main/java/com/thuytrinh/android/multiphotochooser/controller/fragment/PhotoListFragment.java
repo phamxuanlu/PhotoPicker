@@ -28,7 +28,6 @@ import rx.subjects.BehaviorSubject;
 import rx.subjects.PublishSubject;
 
 public class PhotoListFragment extends BaseFragment {
-
   private static final String EXTRA_ALBUM_ID = "albumId";
 
   @Inject PhotoListAdapter mPhotoListAdapter;
@@ -46,7 +45,7 @@ public class PhotoListFragment extends BaseFragment {
 
     mWhenTitleReady = PublishSubject.create();
     mWhenChoicesDone = PublishSubject.create();
-    mWhenChoicesChanged = BehaviorSubject.createWithDefaultValue(mCheckedItemMap.size());
+    mWhenChoicesChanged = BehaviorSubject.create(mCheckedItemMap.size());
   }
 
   public static PhotoListFragment newInstance(long albumId) {

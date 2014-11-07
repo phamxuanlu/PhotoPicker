@@ -13,10 +13,9 @@ import com.thuytrinh.android.multiphotochooser.model.Photo;
 
 import java.util.ArrayList;
 
-import rx.util.functions.Action1;
+import rx.functions.Action1;
 
 public class PhotoChooserActivity extends Activity {
-
   public static final String EXTRA_CHOSEN_PHOTO_LIST = "chosenPhotoList";
 
   private final String mPhotoListTag = "photoList";
@@ -59,12 +58,10 @@ public class PhotoChooserActivity extends Activity {
     }
 
     albumListFragment.whenAlbumSelected().subscribe(new Action1<Long>() {
-
       @Override
       public void call(Long selectedAlbumId) {
         PhotoListFragment photoListFragment = PhotoListFragment.newInstance(selectedAlbumId);
         photoListFragment.whenChoicesChanged().subscribe(new Action1<Integer>() {
-
           @Override
           public void call(Integer choiceCount) {
             if (getActionBar() != null) {
@@ -73,7 +70,6 @@ public class PhotoChooserActivity extends Activity {
           }
         });
         photoListFragment.whenChoicesDone().subscribe(new Action1<ArrayList<Photo>>() {
-
           @Override
           public void call(ArrayList<Photo> chosenPhotoList) {
             // Prepare data.

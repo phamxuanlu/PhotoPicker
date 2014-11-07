@@ -6,10 +6,9 @@ import android.database.MatrixCursor;
 import java.util.HashSet;
 import java.util.Set;
 
-import rx.util.functions.Func1;
+import rx.functions.Func1;
 
 public class GroupByBucketIdFunc implements Func1<Cursor, Cursor> {
-
   @Override
   public Cursor call(Cursor imageCursor) {
     MatrixCursor bucketCursor = new MatrixCursor(
