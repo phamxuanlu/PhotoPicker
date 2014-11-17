@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Checkable;
 import android.widget.GridView;
 
+import com.reactiveviewmodel.core.BaseFragment;
 import com.thuytrinh.photopicker.R;
 import com.thuytrinh.photopicker.controller.SimpleLoaderListener;
 import com.thuytrinh.photopicker.controller.adapter.PhotosAdapter;

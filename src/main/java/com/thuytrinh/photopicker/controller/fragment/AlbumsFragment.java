@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.reactiveviewmodel.core.BaseFragment;
 import com.thuytrinh.photopicker.R;
 import com.thuytrinh.photopicker.controller.SimpleLoaderListener;
 import com.thuytrinh.photopicker.controller.adapter.AlbumsAdapter;
