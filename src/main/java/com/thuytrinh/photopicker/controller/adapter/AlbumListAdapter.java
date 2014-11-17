@@ -46,14 +46,14 @@ public class AlbumListAdapter extends CursorAdapter {
     AlbumView albumView = (AlbumView) view;
 
     String albumName = mImageCursorMapper.getBucketDisplayName();
-    albumView.getNameTextView().setText(albumName);
+    albumView.getNameView().setText(albumName);
 
     File photoFile = mImageCursorMapper.getDataFile();
     mPicasso.load(photoFile)
         .resize(200, 200)
         .placeholder(R.color.placeholder)
         .centerCrop()
-        .into(albumView.getThumbnailImageView());
+        .into(albumView.getThumbnailView());
   }
 
   @Override
