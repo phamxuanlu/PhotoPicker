@@ -5,6 +5,7 @@ android {
   buildToolsVersion "20.0.0"
 
   defaultConfig {
+    applicationId "com.thuytrinh.photopicker"
     minSdkVersion 15
     targetSdkVersion 21
     versionCode 1
