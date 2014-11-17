@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.thuytrinh.photopicker.R;
-import com.thuytrinh.photopicker.controller.fragment.AlbumListFragment;
-import com.thuytrinh.photopicker.controller.fragment.PhotoListFragment;
+import com.thuytrinh.photopicker.controller.fragment.AlbumsFragment;
+import com.thuytrinh.photopicker.controller.fragment.PhotosFragment;
 import com.thuytrinh.photopicker.model.Photo;
 
 import java.util.ArrayList;
@@ -45,23 +45,23 @@ public class PhotoChooserActivity extends Activity {
       getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    AlbumListFragment albumListFragment;
+    AlbumsFragment albumsFragment;
     if (savedInstanceState == null) {
-      albumListFragment = new AlbumListFragment();
+      albumsFragment = new AlbumsFragment();
 
       getFragmentManager().beginTransaction()
-          .add(R.id.container, albumListFragment, mAlbumListTag)
+          .add(R.id.container, albumsFragment, mAlbumListTag)
           .commit();
     } else {
-      albumListFragment = (AlbumListFragment) getFragmentManager()
+      albumsFragment = (AlbumsFragment) getFragmentManager()
           .findFragmentByTag(mAlbumListTag);
     }
 
-    albumListFragment.whenAlbumSelected().subscribe(new Action1<Long>() {
+    albumsFragment.whenAlbumSelected().subscribe(new Action1<Long>() {
       @Override
       public void call(Long selectedAlbumId) {
-        PhotoListFragment photoListFragment = PhotoListFragment.newInstance(selectedAlbumId);
-        photoListFragment.whenChoicesChanged().subscribe(new Action1<Integer>() {
+        PhotosFragment photosFragment = PhotosFragment.newInstance(selectedAlbumId);
+        photosFragment.whenChoicesChanged().subscribe(new Action1<Integer>() {
           @Override
           public void call(Integer choiceCount) {
             if (getActionBar() != null) {
@@ -69,7 +69,7 @@ public class PhotoChooserActivity extends Activity {
             }
           }
         });
-        photoListFragment.whenChoicesDone().subscribe(new Action1<ArrayList<Photo>>() {
+        photosFragment.whenChoicesDone().subscribe(new Action1<ArrayList<Photo>>() {
           @Override
           public void call(ArrayList<Photo> chosenPhotoList) {
             // Prepare data.
@@ -83,7 +83,7 @@ public class PhotoChooserActivity extends Activity {
         });
 
         getFragmentManager().beginTransaction()
-            .replace(R.id.container, photoListFragment, mPhotoListTag)
+            .replace(R.id.container, photosFragment, mPhotoListTag)
             .addToBackStack(mPhotoListTag)
             .commit();
       }

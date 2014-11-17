@@ -15,25 +15,24 @@ import java.io.File;
 
 import javax.inject.Inject;
 
-public class AlbumListAdapter extends CursorAdapter {
-
-  private ImageCursorMapper mImageCursorMapper;
-  private Picasso mPicasso;
+public class AlbumsAdapter extends CursorAdapter {
+  private ImageCursorMapper imageCursorMapper;
+  private Picasso picasso;
 
   @Inject
-  public AlbumListAdapter(Context context,
-                          ImageCursorMapper imageCursorMapper,
-                          Picasso picasso) {
+  public AlbumsAdapter(Context context,
+                       ImageCursorMapper imageCursorMapper,
+                       Picasso picasso) {
     super(context, null, 0);
 
-    mImageCursorMapper = imageCursorMapper;
-    mPicasso = picasso;
+    this.imageCursorMapper = imageCursorMapper;
+    this.picasso = picasso;
   }
 
   @Override
   public long getItemId(int position) {
     getItem(position);
-    return mImageCursorMapper.getBucketId();
+    return imageCursorMapper.getBucketId();
   }
 
   @Override
@@ -45,11 +44,11 @@ public class AlbumListAdapter extends CursorAdapter {
   public void bindView(View view, Context context, Cursor cursor) {
     AlbumView albumView = (AlbumView) view;
 
-    String albumName = mImageCursorMapper.getBucketDisplayName();
+    String albumName = imageCursorMapper.getBucketDisplayName();
     albumView.getNameView().setText(albumName);
 
-    File photoFile = mImageCursorMapper.getDataFile();
-    mPicasso.load(photoFile)
+    File photoFile = imageCursorMapper.getDataFile();
+    picasso.load(photoFile)
         .resize(200, 200)
         .placeholder(R.color.placeholder)
         .centerCrop()
@@ -58,7 +57,7 @@ public class AlbumListAdapter extends CursorAdapter {
 
   @Override
   public Cursor swapCursor(Cursor newCursor) {
-    mImageCursorMapper.setCursor(newCursor);
+    imageCursorMapper.setCursor(newCursor);
     return super.swapCursor(newCursor);
   }
 }

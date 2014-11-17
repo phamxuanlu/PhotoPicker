@@ -7,8 +7,8 @@ import android.database.Cursor;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 
-import com.thuytrinh.photopicker.controller.fragment.AlbumListFragment;
-import com.thuytrinh.photopicker.controller.loader.AlbumListLoader;
+import com.thuytrinh.photopicker.controller.fragment.AlbumsFragment;
+import com.thuytrinh.photopicker.controller.loader.AlbumsLoader;
 import com.thuytrinh.photopicker.module.AppModule;
 import com.thuytrinh.photopicker.module.ObjectLocator;
 
@@ -63,15 +63,14 @@ public class PhotoChooserActivityTest extends ActivityInstrumentationTestCase2<P
   }
 
   @Module(
-      injects = {AlbumListFragment.class},
+      injects = {AlbumsFragment.class},
       overrides = true,
       complete = false
   )
   public class MockAppModule {
     @Provides
-    AlbumListLoader provideMockAlbumListLoader(Context context) {
-      return new AlbumListLoader(context) {
-
+    AlbumsLoader provideAlbumsLoader(Context context) {
+      return new AlbumsLoader(context) {
         @Override
         protected Cursor onLoadInBackground() {
           Log.w("AwesomePicker", "Yes, I did it!");

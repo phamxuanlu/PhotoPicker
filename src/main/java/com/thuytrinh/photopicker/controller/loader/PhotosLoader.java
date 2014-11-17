@@ -6,10 +6,9 @@ import android.provider.MediaStore;
 
 import javax.inject.Inject;
 
-public class PhotoListLoader extends CursorLoader {
-
+public class PhotosLoader extends CursorLoader {
   @Inject
-  public PhotoListLoader(Context context) {
+  public PhotosLoader(Context context) {
     super(context);
 
     setUri(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

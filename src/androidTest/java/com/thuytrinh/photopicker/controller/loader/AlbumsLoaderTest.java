@@ -12,8 +12,8 @@ import dagger.ObjectGraph;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AlbumListLoaderTest extends AndroidTestCase {
-  private AlbumListLoader mAlbumListLoader;
+public class AlbumsLoaderTest extends AndroidTestCase {
+  private AlbumsLoader mAlbumListLoader;
 
   public void testShouldInitializeProperly() {
     Assertions.assertThat(mAlbumListLoader)
@@ -44,6 +44,6 @@ public class AlbumListLoaderTest extends AndroidTestCase {
     super.setUp();
 
     ObjectGraph objectGraph = ObjectLocator.getGraph(getContext());
-    mAlbumListLoader = objectGraph.get(AlbumListLoader.class);
+    mAlbumListLoader = objectGraph.get(AlbumsLoader.class);
   }
 }

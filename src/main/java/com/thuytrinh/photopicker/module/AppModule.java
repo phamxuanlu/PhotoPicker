@@ -4,23 +4,23 @@ import android.content.Context;
 
 import com.squareup.picasso.Picasso;
 import com.thuytrinh.photopicker.controller.ImageCursorMapper;
-import com.thuytrinh.photopicker.controller.adapter.AlbumListAdapter;
-import com.thuytrinh.photopicker.controller.adapter.PhotoListAdapter;
-import com.thuytrinh.photopicker.controller.fragment.AlbumListFragment;
-import com.thuytrinh.photopicker.controller.fragment.PhotoListFragment;
-import com.thuytrinh.photopicker.controller.loader.AlbumListLoader;
-import com.thuytrinh.photopicker.controller.loader.PhotoListLoader;
+import com.thuytrinh.photopicker.controller.adapter.AlbumsAdapter;
+import com.thuytrinh.photopicker.controller.adapter.PhotosAdapter;
+import com.thuytrinh.photopicker.controller.fragment.AlbumsFragment;
+import com.thuytrinh.photopicker.controller.fragment.PhotosFragment;
+import com.thuytrinh.photopicker.controller.loader.AlbumsLoader;
+import com.thuytrinh.photopicker.controller.loader.PhotosLoader;
 
 import dagger.Module;
 import dagger.Provides;
 
 @Module(
     injects = {
-        AlbumListFragment.class,
-        AlbumListLoader.class,
-        AlbumListAdapter.class,
-        PhotoListFragment.class,
-        PhotoListAdapter.class
+        AlbumsFragment.class,
+        AlbumsLoader.class,
+        AlbumsAdapter.class,
+        PhotosFragment.class,
+        PhotosAdapter.class
     },
     library = true
 )
@@ -37,8 +37,8 @@ public class AppModule {
   }
 
   @Provides
-  AlbumListLoader provideAlbumListLoader(Context context) {
-    return new AlbumListLoader(context);
+  AlbumsLoader provideAlbumsLoader(Context context) {
+    return new AlbumsLoader(context);
   }
 
   @Provides
@@ -47,15 +47,15 @@ public class AppModule {
   }
 
   @Provides
-  AlbumListAdapter provideAlbumListAdapter(Context context,
-                                           ImageCursorMapper imageCursorMapper,
-                                           Picasso picasso) {
-    return new AlbumListAdapter(context, imageCursorMapper, picasso);
+  AlbumsAdapter provideAlbumsAdapter(Context context,
+                                     ImageCursorMapper imageCursorMapper,
+                                     Picasso picasso) {
+    return new AlbumsAdapter(context, imageCursorMapper, picasso);
   }
 
   @Provides
-  PhotoListLoader providePhotoListLoader(Context context) {
-    return new PhotoListLoader(context);
+  PhotosLoader providePhotosLoader(Context context) {
+    return new PhotosLoader(context);
   }
 
   @Provides
@@ -64,9 +64,9 @@ public class AppModule {
   }
 
   @Provides
-  PhotoListAdapter providePhotoListAdapter(Context context,
-                                           ImageCursorMapper imageCursorMapper,
-                                           Picasso picasso) {
-    return new PhotoListAdapter(context, imageCursorMapper, picasso);
+  PhotosAdapter providePhotosAdapter(Context context,
+                                     ImageCursorMapper imageCursorMapper,
+                                     Picasso picasso) {
+    return new PhotosAdapter(context, imageCursorMapper, picasso);
   }
 }

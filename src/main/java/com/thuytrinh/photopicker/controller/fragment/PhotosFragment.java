@@ -14,8 +14,8 @@ import android.widget.GridView;
 
 import com.thuytrinh.photopicker.R;
 import com.thuytrinh.photopicker.controller.SimpleLoaderListener;
-import com.thuytrinh.photopicker.controller.adapter.PhotoListAdapter;
-import com.thuytrinh.photopicker.controller.loader.PhotoListLoader;
+import com.thuytrinh.photopicker.controller.adapter.PhotosAdapter;
+import com.thuytrinh.photopicker.controller.loader.PhotosLoader;
 import com.thuytrinh.photopicker.model.Photo;
 import com.thuytrinh.photopicker.module.ObjectLocator;
 
@@ -27,59 +27,59 @@ import javax.inject.Provider;
 import rx.subjects.BehaviorSubject;
 import rx.subjects.PublishSubject;
 
-public class PhotoListFragment extends BaseFragment {
+public class PhotosFragment extends BaseFragment {
   private static final String EXTRA_ALBUM_ID = "albumId";
 
-  @Inject PhotoListAdapter mPhotoListAdapter;
-  @Inject Provider<PhotoListLoader> mPhotoListLoaderProvider;
+  @Inject PhotosAdapter photosAdapter;
+  @Inject Provider<PhotosLoader> photosLoaderProvider;
 
-  private PublishSubject<String> mWhenTitleReady;
-  private PublishSubject<ArrayList<Photo>> mWhenChoicesDone;
-  private BehaviorSubject<Integer> mWhenChoicesChanged;
+  private PublishSubject<String> whenTitleReady;
+  private PublishSubject<ArrayList<Photo>> whenChoicesDone;
+  private BehaviorSubject<Integer> whenChoicesChanged;
 
-  private SparseArray<Long> mCheckedItemMap;
-  private long mAlbumId;
+  private SparseArray<Long> checkedItems;
+  private long albumId;
 
-  public PhotoListFragment() {
-    mCheckedItemMap = new SparseArray<>();
+  public PhotosFragment() {
+    checkedItems = new SparseArray<>();
 
-    mWhenTitleReady = PublishSubject.create();
-    mWhenChoicesDone = PublishSubject.create();
-    mWhenChoicesChanged = BehaviorSubject.create(mCheckedItemMap.size());
+    whenTitleReady = PublishSubject.create();
+    whenChoicesDone = PublishSubject.create();
+    whenChoicesChanged = BehaviorSubject.create(checkedItems.size());
   }
 
-  public static PhotoListFragment newInstance(long albumId) {
+  public static PhotosFragment newInstance(long albumId) {
     Bundle args = new Bundle();
     args.putLong(EXTRA_ALBUM_ID, albumId);
 
-    PhotoListFragment fragment = new PhotoListFragment();
+    PhotosFragment fragment = new PhotosFragment();
     fragment.setArguments(args);
     return fragment;
   }
 
   public PublishSubject<String> whenTitleReady() {
-    return mWhenTitleReady;
+    return whenTitleReady;
   }
 
   public PublishSubject<ArrayList<Photo>> whenChoicesDone() {
-    return mWhenChoicesDone;
+    return whenChoicesDone;
   }
 
   public BehaviorSubject<Integer> whenChoicesChanged() {
-    return mWhenChoicesChanged;
+    return whenChoicesChanged;
   }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setHasOptionsMenu(true);
-    setLayoutId(R.layout.fragment_photo_list);
+    setLayoutId(R.layout.fragment_photos);
 
     ObjectLocator.getGraph(getActivity().getApplicationContext())
         .inject(this);
 
-    mAlbumId = getArguments().getLong(EXTRA_ALBUM_ID);
-    mPhotoListAdapter.setCheckedItemMap(mCheckedItemMap);
+    albumId = getArguments().getLong(EXTRA_ALBUM_ID);
+    photosAdapter.setCheckedItems(checkedItems);
   }
 
   @Override
@@ -103,34 +103,32 @@ public class PhotoListFragment extends BaseFragment {
     super.onActivityCreated(savedInstanceState);
 
     getLoaderManager().initLoader(0, null, new SimpleLoaderListener<Cursor>() {
-
       @Override
       public Loader<Cursor> onCreateLoader() {
-        PhotoListLoader photoListLoader = mPhotoListLoaderProvider.get();
-        photoListLoader.setAlbumId(mAlbumId);
-        return photoListLoader;
+        PhotosLoader photosLoader = photosLoaderProvider.get();
+        photosLoader.setAlbumId(albumId);
+        return photosLoader;
       }
 
       @Override
       public void onLoadFinished(Cursor data) {
-        mPhotoListAdapter.swapCursor(data);
+        photosAdapter.swapCursor(data);
       }
 
       @Override
       public void onLoaderReset() {
-        mPhotoListAdapter.swapCursor(null);
+        photosAdapter.swapCursor(null);
       }
     });
 
-    mWhenTitleReady.onNext(getString(R.string.photos));
+    whenTitleReady.onNext(getString(R.string.photos));
   }
 
   @Override
   public void onViewCreated(View view, Bundle savedInstanceState) {
-    GridView photoGridView = (GridView) view.findViewById(R.id.photoGridView);
-    photoGridView.setAdapter(mPhotoListAdapter);
-    photoGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+    GridView photosView = (GridView) view.findViewById(R.id.photosView);
+    photosView.setAdapter(photosAdapter);
+    photosView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         boolean isChecked = toggleChoice(position, id);
@@ -142,26 +140,26 @@ public class PhotoListFragment extends BaseFragment {
 
   private boolean toggleChoice(int position, long id) {
     boolean isChecked = false;
-    if (mCheckedItemMap.get(position) == null) {
-      mCheckedItemMap.put(position, id);
+    if (checkedItems.get(position) == null) {
+      checkedItems.put(position, id);
       isChecked = true;
     } else {
-      mCheckedItemMap.remove(position);
+      checkedItems.remove(position);
     }
 
     // Emit the change to subscribers.
-    mWhenChoicesChanged.onNext(mCheckedItemMap.size());
+    whenChoicesChanged.onNext(checkedItems.size());
     return isChecked;
   }
 
   private void emitChoices() {
     ArrayList<Photo> selectedPhotoList = new ArrayList<>();
-    for (int i = 0, size = mCheckedItemMap.size(); i < size; i++) {
-      int selectedPosition = mCheckedItemMap.keyAt(i);
-      Photo selectedPhoto = (Photo) mPhotoListAdapter.getItem(selectedPosition);
+    for (int i = 0, size = checkedItems.size(); i < size; i++) {
+      int selectedPosition = checkedItems.keyAt(i);
+      Photo selectedPhoto = (Photo) photosAdapter.getItem(selectedPosition);
       selectedPhotoList.add(selectedPhoto);
     }
 
-    mWhenChoicesDone.onNext(selectedPhotoList);
+    whenChoicesDone.onNext(selectedPhotoList);
   }
 }

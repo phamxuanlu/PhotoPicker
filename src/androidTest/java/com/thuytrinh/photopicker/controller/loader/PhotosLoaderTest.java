@@ -5,13 +5,13 @@ import android.test.AndroidTestCase;
 
 import org.assertj.android.api.Assertions;
 
-public class PhotoListLoaderTest extends AndroidTestCase {
+public class PhotosLoaderTest extends AndroidTestCase {
   public void testShouldInitializeProperly() {
-    PhotoListLoader photoListLoader = new PhotoListLoader(getContext());
+    PhotosLoader photosLoader = new PhotosLoader(getContext());
     long mockAlbumId = 12345L;
-    photoListLoader.setAlbumId(mockAlbumId);
+    photosLoader.setAlbumId(mockAlbumId);
 
-    Assertions.assertThat(photoListLoader)
+    Assertions.assertThat(photosLoader)
         .hasProjection(
             MediaStore.Images.Media._ID,
             MediaStore.Images.Media.BUCKET_ID,

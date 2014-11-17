@@ -9,10 +9,9 @@ import com.thuytrinh.photopicker.controller.GroupByBucketIdFunc;
 
 import javax.inject.Inject;
 
-public class AlbumListLoader extends CursorLoader {
-
+public class AlbumsLoader extends CursorLoader {
   @Inject
-  public AlbumListLoader(Context context) {
+  public AlbumsLoader(Context context) {
     super(context);
 
     setUri(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

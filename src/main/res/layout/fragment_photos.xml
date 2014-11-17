@@ -2,13 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.thuytrinh.photopicker.controller.fragment.AlbumListFragment">
+    android:background="@android:color/white"
+    tools:context="com.thuytrinh.photopicker.controller.fragment.PhotosFragment">
 
   <GridView
-      android:id="@+id/albumGridView"
+      android:id="@+id/photosView"
       style="@style/GalleryGridViewStyle"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:numColumns="2" />
+      android:drawSelectorOnTop="true"
+      android:numColumns="3" />
 
 </RelativeLayout>

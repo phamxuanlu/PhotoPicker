@@ -16,25 +16,25 @@ import java.io.File;
 
 import javax.inject.Inject;
 
-public class PhotoListAdapter extends CursorAdapter {
-  private ImageCursorMapper mImageCursorMapper;
-  private Picasso mPicasso;
-  private SparseArray<Long> mCheckedItemMap;
+public class PhotosAdapter extends CursorAdapter {
+  private ImageCursorMapper imageCursorMapper;
+  private Picasso picasso;
+  private SparseArray<Long> checkedItems;
 
   @Inject
-  public PhotoListAdapter(Context context,
-                          ImageCursorMapper imageCursorMapper,
-                          Picasso picasso) {
+  public PhotosAdapter(Context context,
+                       ImageCursorMapper imageCursorMapper,
+                       Picasso picasso) {
     super(context, null, 0);
 
-    mImageCursorMapper = imageCursorMapper;
-    mPicasso = picasso;
+    this.imageCursorMapper = imageCursorMapper;
+    this.picasso = picasso;
   }
 
   @Override
   public Object getItem(int position) {
     super.getItem(position);
-    return mImageCursorMapper.toPhoto();
+    return imageCursorMapper.toPhoto();
   }
 
   @Override
@@ -47,10 +47,10 @@ public class PhotoListAdapter extends CursorAdapter {
     PhotoItemLayout itemView = (PhotoItemLayout) view;
 
     int position = cursor.getPosition();
-    itemView.setChecked(mCheckedItemMap.get(position) != null);
+    itemView.setChecked(checkedItems.get(position) != null);
 
-    File photoFile = mImageCursorMapper.getDataFile();
-    mPicasso.load(photoFile)
+    File photoFile = imageCursorMapper.getDataFile();
+    picasso.load(photoFile)
         .resize(200, 200)
         .placeholder(R.color.placeholder)
         .centerCrop()
@@ -59,11 +59,11 @@ public class PhotoListAdapter extends CursorAdapter {
 
   @Override
   public Cursor swapCursor(Cursor newCursor) {
-    mImageCursorMapper.setCursor(newCursor);
+    imageCursorMapper.setCursor(newCursor);
     return super.swapCursor(newCursor);
   }
 
-  public void setCheckedItemMap(SparseArray<Long> checkedItemMap) {
-    mCheckedItemMap = checkedItemMap;
+  public void setCheckedItems(SparseArray<Long> checkedItems) {
+    this.checkedItems = checkedItems;
   }
 }
