@@ -17,7 +17,6 @@ import java.io.File;
 import javax.inject.Inject;
 
 public class PhotoListAdapter extends CursorAdapter {
-
   private ImageCursorMapper mImageCursorMapper;
   private Picasso mPicasso;
   private SparseArray<Long> mCheckedItemMap;

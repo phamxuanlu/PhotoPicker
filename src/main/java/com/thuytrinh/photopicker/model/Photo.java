@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Photo implements Parcelable {
-
   public static final Creator<Photo> CREATOR = new Creator<Photo>() {
 
     @Override
@@ -22,32 +21,32 @@ public class Photo implements Parcelable {
     }
   };
 
-  private long mId;
-  private long mAlbumId;
-  private String mPath;
+  private long id;
+  private long albumId;
+  private String path;
 
   public long getId() {
-    return mId;
+    return id;
   }
 
   public void setId(long id) {
-    mId = id;
+    this.id = id;
   }
 
   public String getPath() {
-    return mPath;
+    return path;
   }
 
   public void setPath(String path) {
-    mPath = path;
+    this.path = path;
   }
 
   public long getAlbumId() {
-    return mAlbumId;
+    return albumId;
   }
 
   public void setAlbumId(long albumId) {
-    mAlbumId = albumId;
+    this.albumId = albumId;
   }
 
   @Override
@@ -57,8 +56,8 @@ public class Photo implements Parcelable {
 
   @Override
   public void writeToParcel(Parcel dest, int flags) {
-    dest.writeLong(mId);
-    dest.writeLong(mAlbumId);
-    dest.writeString(mPath);
+    dest.writeLong(id);
+    dest.writeLong(albumId);
+    dest.writeString(path);
   }
 }

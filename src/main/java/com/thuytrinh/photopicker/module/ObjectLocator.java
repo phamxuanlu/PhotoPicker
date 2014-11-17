@@ -5,27 +5,26 @@ import android.content.Context;
 import dagger.ObjectGraph;
 
 public class ObjectLocator {
-
-  private static ObjectLocator sObjectLocator;
-  private ObjectGraph mGraph;
+  private static ObjectLocator objectLocator;
+  private ObjectGraph graph;
 
   private ObjectLocator() { }
 
   public static ObjectGraph getGraph(Context appContext) {
-    if (sObjectLocator == null) {
-      sObjectLocator = new ObjectLocator();
-      sObjectLocator.buildGraph(appContext);
+    if (objectLocator == null) {
+      objectLocator = new ObjectLocator();
+      objectLocator.buildGraph(appContext);
     }
 
-    return sObjectLocator.mGraph;
+    return objectLocator.graph;
   }
 
   public static void setMockGraph(ObjectGraph mockGraph) {
-    sObjectLocator = new ObjectLocator();
-    sObjectLocator.mGraph = mockGraph;
+    objectLocator = new ObjectLocator();
+    objectLocator.graph = mockGraph;
   }
 
   private void buildGraph(Context appContext) {
-    mGraph = ObjectGraph.create(new AppModule(appContext));
+    graph = ObjectGraph.create(new AppModule(appContext));
   }
 }

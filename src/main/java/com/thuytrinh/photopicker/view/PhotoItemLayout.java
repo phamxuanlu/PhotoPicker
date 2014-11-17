@@ -9,11 +9,10 @@ import android.widget.RelativeLayout;
 import com.thuytrinh.photopicker.R;
 
 public class PhotoItemLayout extends RelativeLayout implements Checkable {
+  private ImageView photoView;
+  private ImageView checkMarkView;
 
-  private ImageView mPhotoView;
-  private ImageView mCheckMarkView;
-
-  private boolean mChecked;
+  private boolean isChecked;
 
   public PhotoItemLayout(Context context) {
     super(context);
@@ -21,29 +20,29 @@ public class PhotoItemLayout extends RelativeLayout implements Checkable {
   }
 
   public ImageView getCheckMarkView() {
-    return mCheckMarkView;
+    return checkMarkView;
   }
 
   public ImageView getPhotoView() {
-    return mPhotoView;
+    return photoView;
   }
 
   @Override
   public boolean isChecked() {
-    return mChecked;
+    return isChecked;
   }
 
   @Override
   public void setChecked(boolean checked) {
-    mChecked = checked;
+    isChecked = checked;
 
-    int checkMarkVisibility = mChecked ? VISIBLE : GONE;
-    mCheckMarkView.setVisibility(checkMarkVisibility);
+    int checkMarkVisibility = isChecked ? VISIBLE : GONE;
+    checkMarkView.setVisibility(checkMarkVisibility);
   }
 
   @Override
   public void toggle() {
-    setChecked(!mChecked);
+    setChecked(!isChecked);
   }
 
   @Override
@@ -55,8 +54,8 @@ public class PhotoItemLayout extends RelativeLayout implements Checkable {
   private void initLayout() {
     LayoutInflater.from(getContext()).inflate(R.layout.view_photo_item, this, true);
 
-    mPhotoView = (ImageView) findViewById(R.id.photoView);
-    mCheckMarkView = (ImageView) findViewById(R.id.checkMarkView);
+    photoView = (ImageView) findViewById(R.id.photoView);
+    checkMarkView = (ImageView) findViewById(R.id.checkMarkView);
 
     setChecked(false);
   }

@@ -25,16 +25,15 @@ import dagger.Provides;
     library = true
 )
 public class AppModule {
-
-  private Context mContext;
+  private Context context;
 
   public AppModule(Context context) {
-    mContext = context;
+    this.context = context;
   }
 
   @Provides
   Context provideContext() {
-    return mContext;
+    return context;
   }
 
   @Provides

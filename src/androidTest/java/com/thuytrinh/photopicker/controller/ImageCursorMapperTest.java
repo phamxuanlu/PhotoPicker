@@ -14,7 +14,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ImageCursorMapperTest extends AndroidTestCase {
-
   public void testShouldGetIdProperly() {
     Cursor mockImageCursor = mock(Cursor.class);
 

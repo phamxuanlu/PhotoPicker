@@ -5,7 +5,6 @@ import android.test.AndroidTestCase;
 import static org.assertj.android.api.Assertions.assertThat;
 
 public class PhotoItemLayoutTest extends AndroidTestCase {
-
   public void testShouldInitializeLayoutProperly() {
     PhotoItemLayout itemLayout = new PhotoItemLayout(getContext());
 

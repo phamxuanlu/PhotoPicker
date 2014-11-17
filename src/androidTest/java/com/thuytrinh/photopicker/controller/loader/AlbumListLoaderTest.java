@@ -13,7 +13,6 @@ import dagger.ObjectGraph;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AlbumListLoaderTest extends AndroidTestCase {
-
   private AlbumListLoader mAlbumListLoader;
 
   public void testShouldInitializeProperly() {

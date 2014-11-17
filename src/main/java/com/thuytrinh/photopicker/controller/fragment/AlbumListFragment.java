@@ -20,7 +20,6 @@ import javax.inject.Provider;
 import rx.subjects.PublishSubject;
 
 public class AlbumListFragment extends BaseFragment {
-
   @Inject AlbumListAdapter mAlbumListAdapter;
   @Inject Provider<AlbumListLoader> mAlbumListLoaderProvider;
 
@@ -44,7 +43,6 @@ public class AlbumListFragment extends BaseFragment {
     super.onActivityCreated(savedInstanceState);
 
     getLoaderManager().initLoader(0, null, new SimpleLoaderListener<Cursor>() {
-
       @Override
       public Loader<Cursor> onCreateLoader() {
         return mAlbumListLoaderProvider.get();

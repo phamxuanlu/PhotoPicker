@@ -7,7 +7,6 @@ import junit.framework.TestCase;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PhotoTest extends TestCase {
-
   public void testShouldParcelProperly() {
     Photo originalPhoto = new Photo();
     originalPhoto.setId(123L);

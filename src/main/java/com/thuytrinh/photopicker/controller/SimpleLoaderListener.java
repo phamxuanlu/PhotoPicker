@@ -5,7 +5,6 @@ import android.content.Loader;
 import android.os.Bundle;
 
 public abstract class SimpleLoaderListener<D> implements LoaderManager.LoaderCallbacks<D> {
-
   @Override
   public Loader<D> onCreateLoader(int id, Bundle args) {
     return onCreateLoader();

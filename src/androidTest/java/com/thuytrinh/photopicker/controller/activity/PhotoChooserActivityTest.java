@@ -29,7 +29,7 @@ public class PhotoChooserActivityTest extends ActivityInstrumentationTestCase2<P
   }
 
   public void testActivity() throws InterruptedException {
-    new CountDownLatch(1).await();
+    new CountDownLatch(0).await();
   }
 
   public void testShouldCreateIntentProperly() {

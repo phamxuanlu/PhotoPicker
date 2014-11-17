@@ -9,9 +9,8 @@ import android.widget.TextView;
 import com.thuytrinh.photopicker.R;
 
 public class AlbumView extends RelativeLayout {
-
-  private TextView mNameTextView;
-  private ImageView mThumbnailImageView;
+  private TextView nameTextView;
+  private ImageView thumbnailImageView;
 
   public AlbumView(Context context) {
     super(context);
@@ -19,11 +18,11 @@ public class AlbumView extends RelativeLayout {
   }
 
   public TextView getNameTextView() {
-    return mNameTextView;
+    return nameTextView;
   }
 
   public ImageView getThumbnailImageView() {
-    return mThumbnailImageView;
+    return thumbnailImageView;
   }
 
   @Override
@@ -35,7 +34,7 @@ public class AlbumView extends RelativeLayout {
   private void initLayout() {
     LayoutInflater.from(getContext()).inflate(R.layout.view_album, this, true);
 
-    mNameTextView = (TextView) findViewById(R.id.nameTextView);
-    mThumbnailImageView = (ImageView) findViewById(R.id.thumbnailImageView);
+    nameTextView = (TextView) findViewById(R.id.nameTextView);
+    thumbnailImageView = (ImageView) findViewById(R.id.thumbnailImageView);
   }
 }

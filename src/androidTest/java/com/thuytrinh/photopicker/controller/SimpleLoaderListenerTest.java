@@ -8,7 +8,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class SimpleLoaderListenerTest extends TestCase {
-
   public void testShouldCreateLoaderProperly() {
     final Loader<String> mockLoader = (Loader<String>) mock(Loader.class);
     SimpleLoaderListener<String> listener = new SimpleLoaderListener<String>() {
