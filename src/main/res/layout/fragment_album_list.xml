@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.thuytrinh.android.multiphotochooser.controller.fragment.AlbumListFragment">
+    tools:context="com.thuytrinh.photopicker.controller.fragment.AlbumListFragment">
 
   <GridView
       android:id="@+id/albumGridView"

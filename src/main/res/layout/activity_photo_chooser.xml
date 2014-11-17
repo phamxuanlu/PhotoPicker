@@ -4,5 +4,5 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.thuytrinh.android.multiphotochooser.controller.activity.PhotoChooserActivity"
+    tools:context="com.thuytrinh.photopicker.controller.activity.PhotoChooserActivity"
     tools:ignore="MergeRootFrame" />
